@@ -1,7 +1,5 @@
 FROM node:21-slim
 
-# Parei em 2:01:15
-
 # openssl é dependia do prisma
 RUN apt update && apt install -y openssl procps
 

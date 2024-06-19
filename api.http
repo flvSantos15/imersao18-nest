@@ -6,7 +6,7 @@ POST http://localhost:3000/events
 Content-Type: application/json
 
 {
-  "name": "RSJX",
+  "name": "Metodo TAJ",
   "description": "This is a new event",
   "date": "2024-01-01T00:00:00",
   "price": 110
@@ -42,4 +42,17 @@ Content-Type: application/json
 
 {
   "name": "ReactJS"
+}
+
+###
+@spotName = {{ createSpot.response.body.name }}
+
+###
+POST http://localhost:3000/events/{{eventId}}/reserve
+Content-Type: application/json
+
+{
+  "spots": ["{{spotName}}"],
+  "ticket_kind": "full",
+  "email": "test@test.com"
 }

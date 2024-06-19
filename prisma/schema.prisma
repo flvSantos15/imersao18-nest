@@ -31,5 +31,42 @@ model Spot {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 
-  Event Event @relation(fields: [eventId], references: [id])
+  Event              Event                @relation(fields: [eventId], references: [id])
+  Ticket             Ticket?
+  ReservationHistory ReservationHistory[]
+}
+
+model Ticket {
+  id         String     @id @default(uuid())
+  email      String
+  ticketKind TicketKind
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @default(now())
+  spotId     String
+
+  Spot Spot @relation(fields: [spotId], references: [id])
+
+  @@unique([spotId])
+}
+
+model ReservationHistory {
+  id         String       @id @default(uuid())
+  email      String
+  ticketKind TicketKind
+  status     TicketStatus
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+
+  spotId String
+  Spot   Spot   @relation(fields: [spotId], references: [id])
+}
+
+enum TicketKind {
+  full
+  half
+}
+
+enum TicketStatus {
+  reserved
+  canceled
 }
