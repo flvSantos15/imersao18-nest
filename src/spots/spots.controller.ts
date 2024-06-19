@@ -11,8 +11,6 @@ import { SpotsService } from './spots.service'
 import { CreateSpotDto } from './dto/create-spot.dto'
 import { UpdateSpotDto } from './dto/update-spot.dto'
 
-// Parei em 1:38:38
-
 @Controller('events/:eventId/spots')
 export class SpotsController {
   constructor(private readonly spotsService: SpotsService) {}
@@ -22,7 +20,7 @@ export class SpotsController {
     @Body() createSpotDto: CreateSpotDto,
     @Param('eventId') eventId: string
   ) {
-    return this.spotsService.create(createSpotDto)
+    return this.spotsService.create({ ...createSpotDto, eventId })
   }
 
   @Get()
